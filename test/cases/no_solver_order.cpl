@@ -1,0 +1,11 @@
+fn main() {
+    var x: rand i32;
+    var y: rand i32;
+    var z: rand i32;
+
+    $randomize(x, y, z) {
+        x + y < z;
+    };
+
+    $print(x, y, z);
+}

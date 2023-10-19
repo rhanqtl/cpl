@@ -1,0 +1,21 @@
+fn count_bits(x: i32) -> i32 {
+    var cnt /* : i32 */ = 0;
+    while (x != 0) {
+        cnt++;
+        x = x & (x - 1);
+    }
+    return cnt;
+}
+
+fn main() {
+    var x: rand i32;
+    var y: rand i32;
+    var z: rand i32;
+
+    $randomize(x, y, z) {
+        x == y;
+        z == f(y);
+    };
+
+    $print(x, y, z);
+}

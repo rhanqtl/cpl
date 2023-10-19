@@ -1,0 +1,14 @@
+fn main() {
+    var mat: rand [][]u1;
+    var n: rand i32;
+    
+    $randomize(darr) {
+        0 < n && n <= 10;
+        $len(mat) == n;
+        for (var row : darr) {
+            $len(row) == n;
+        }
+    };
+
+    $print(mat);
+}
