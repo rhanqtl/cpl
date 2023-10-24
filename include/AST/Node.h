@@ -12,7 +12,7 @@
 namespace cpl::ast {
 
 class Manager;
-class NodeRef;
+class ObjectRef;
 
 class Visitor;
 
@@ -40,17 +40,23 @@ class Node {
   explicit Node(Kind k) : k_{k} {}
 
  public:
-  Kind kind() const { return k_; }
+  Kind kind() const {
+    return k_;
+  }
 
   virtual void accept(Visitor &vis) = 0;
 
   std::string to_string() const;
 
  protected:
-  void set_hash(size_t h) { hash_ = h; }
+  void set_hash(size_t h) {
+    hash_ = h;
+  }
 
  private:
-  size_t hash() const { return hash_; }
+  size_t hash() const {
+    return hash_;
+  }
   void inc_ref() {
     solver_assert(ref_cnt_ < std::numeric_limits<decltype(ref_cnt_)>::max());
     ref_cnt_++;
@@ -59,7 +65,9 @@ class Node {
     solver_assert(ref_cnt_ > 0);
     return --ref_cnt_;
   }
-  size_t ref_count() const { return ref_cnt_; }
+  size_t ref_count() const {
+    return ref_cnt_;
+  }
 
  protected:
   /// \brief Check equivalence when hash codes collide.
@@ -91,8 +99,12 @@ class Constant : public Expr {
   explicit Constant(int64_t val) : Expr{Node::Kind::CONSTANT}, v_{val} {}
   explicit Constant(uint64_t val) : Expr{Node::Kind::CONSTANT}, v_{val} {}
 
-  bool is_unsigned_int() const { return v_.index() == 0; }
-  bool is_signed_int() const { return v_.index() == 1; }
+  bool is_unsigned_int() const {
+    return v_.index() == 0;
+  }
+  bool is_signed_int() const {
+    return v_.index() == 1;
+  }
 
   operator uint64_t() const {
     solver_assert(is_unsigned_int());
@@ -153,7 +165,7 @@ class BinaryExpr : public Expr {
   };
 
  protected:
-  BinaryExpr(Opcode op, std::vector<NodeRef> args);
+  BinaryExpr(Opcode op, std::vector<ObjectRef> args);
 
  public:
   void accept(Visitor &vis) override;
@@ -217,8 +229,12 @@ class ConcatExpr : public Expr {
       : Expr{Node::Kind::CONCAT}, elems_{std::move(xs)} {}
 
  public:
-  const std::vector<Expr *> &elements() const { return elems_; }
-  std::vector<Expr *> &elements() { return elems_; }
+  const std::vector<Expr *> &elements() const {
+    return elems_;
+  }
+  std::vector<Expr *> &elements() {
+    return elems_;
+  }
 
  private:
   std::vector<Expr *> elems_;
@@ -240,9 +256,15 @@ class Class {
  public:
   class Property {
    public:
-    const std::string &name() const { return name_; }
-    bool is_rand() const { return rand_; }
-    bool is_static() const { return static_; }
+    const std::string &name() const {
+      return name_;
+    }
+    bool is_rand() const {
+      return rand_;
+    }
+    bool is_static() const {
+      return static_;
+    }
 
    private:
     const std::string name_;
@@ -255,17 +277,27 @@ class Class {
    public:
     class Item {
      public:
-      Expr *expression() const { return expr_; }
+      Expr *expression() const {
+        return expr_;
+      }
 
      private:
       Expr *const expr_;
     };
 
    public:
-    const std::string &name() const { return name_; }
-    bool is_static() const { return static_; }
-    const std::vector<Item> &items() const { return items_; }
-    std::vector<Item> &items() { return items_; }
+    const std::string &name() const {
+      return name_;
+    }
+    bool is_static() const {
+      return static_;
+    }
+    const std::vector<Item> &items() const {
+      return items_;
+    }
+    std::vector<Item> &items() {
+      return items_;
+    }
 
    private:
     const bool static_;

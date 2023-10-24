@@ -1,0 +1,13 @@
+class Example =
+    var x: rand i32
+    var y: rand i32
+    var z: rand i32
+
+    cst cst_1 =
+        x + y < z
+
+
+fn main =
+    obj = Example()
+    obj.randomize()
+    print(obj)

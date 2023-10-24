@@ -12,7 +12,7 @@ class Singleton {
     static_assert(std::is_base_of_v<Singleton, T>,
                   "type parameter T shall be a subclass of Singleton");
   }
-  virtual ~Singleton() {}
+  virtual ~Singleton() = default;
 
  private:
   Singleton(const Singleton &) = delete;
@@ -22,18 +22,10 @@ class Singleton {
 
  public:
   static T &instance() {
-    if (!inst_) inst_ = new T{};
-    return *inst_;
+    static T inst;
+    return inst;
   }
-
-  static void destroy() { delete inst_; }
-
- private:
-  static T *inst_;
 };
-
-template <typename DerivedT>
-DerivedT *Singleton<DerivedT>::inst_ = nullptr;
 
 }  // namespace cpl::util
 

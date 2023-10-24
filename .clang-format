@@ -1,2 +1,4 @@
 BasedOnStyle: google
 AllowShortFunctionsOnASingleLine: Empty
+# Supported in clang-format 16
+# InsertNewlineAtEOF: true
